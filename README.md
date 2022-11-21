@@ -7,3 +7,6 @@ Colaboradores del Proyecto:
 -David Garcia Tencio
 -Nazih Houssain Zayzafoun
 -Daniel Sanchez Acuña 
+
+Profesor Docente: 
+Eduardo González Paniagua.
