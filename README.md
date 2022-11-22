@@ -10,3 +10,8 @@ Colaboradores del Proyecto:
 
 Profesor Docente: 
 Eduardo González Paniagua.
+
+Instrucciones
+-------------------------------------------------------------------------------
+El script para cargar las tablas se encuentra en ./DB/cargar-base
+Existe el usuario y contraseña admin admin para navegar como administrador en la página y existe el usuario y contraseña juan 123 para navegar como usuario
