@@ -34,59 +34,9 @@ $datos = $resultado->fetch_assoc();
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <header>
-        <nav class="navbar navbar-dark navbar-expand-md bg-dark">
-            <a class="navbar-brand mb-0 h1">
-                <img class="d-inline-block mx-1" src="https://icucycle.com/wp-content/uploads/2018/05/bike-white-hi.png"
-                    width="60" height="30" />
-                BiciTienda
-            </a>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="./bicicleta/misBicicletas.php">Mis bicicletas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./bicicleta/gestion.php">Gestionar bicicletas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./compra/gestion.php">Gestionar compras</a>
-                </li>
-            </ul>
-            <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Categorias
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Montaña</a></li>
-                    <li><a class="dropdown-item" href="#">BMX</a></li>
-                    <li><a class="dropdown-item" href="#">Niños</a></li>
-                </ul>
-            </div>
-            <button data-bs-target="#navbarNav" aira-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation" type="button" class="navbar-toggler" data-bs-toggle="collapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a href="#" class="nav-link active">Logout</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a href="#" class="nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-cart" viewBox="0 0 16 16">
-                                <path
-                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                            </svg>
-                        </a>
-                    </li>
+    <?php include('include/navbar.php')?>
 
-                </ul>
-            </div>
-        </nav>
-    </header>
     <div class="container p-5">
         <div class="d-flex bd-highlight">
             <div class="p-2 w-100 bd-highlight">
@@ -163,7 +113,7 @@ $datos = $resultado->fetch_assoc();
                             <hr>
                             <br>
                             <div class="btn-group float-end" role="group" aria-label="Basic example">
-                                <a class="btn btn-default">Volver</a>
+                                <a href="gestion.php" class="btn btn-default">Volver</a>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">

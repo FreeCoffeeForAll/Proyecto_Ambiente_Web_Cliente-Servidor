@@ -1,9 +1,5 @@
 <?php 
 session_start();
-
-if(!isset($_SESSION['username'])){
-    header("location: login.php");
-}
 ?>
 
 <!doctype html>
@@ -53,10 +49,11 @@ if(!isset($_SESSION['username'])){
                     echo "        <a class='link-primary' href='details.php?id={$datos['id_producto']}'> <h5 class='card-title'>{$datos['nom_producto']}</h5></a>";
                     echo "        <p class='card-text'>{$datos['desc_producto']}</p>";
                     echo "        <h5>$ {$datos['precio']}</h5>";
-                    echo '        <a href="#" class="btn btn-success align-self-end"';
-                    echo '            style="position: absolute; right: 0; bottom: 0; margin: auto 10px 10px auto;">Añadir</a>';
+                    echo "        <a href='carrito.php?id={$datos['id_producto']}'";
+                    echo "        <input name='add' type='submit' value='Añadir' class='btn btn-success align-self-end'";
+                    echo '            style="position: absolute; right: 0; bottom: 0; margin: auto 10px 10px auto;">Añadir</input></a>';
                     echo '    </div>';
-                    echo '  </div>';          
+                    echo '  </div>';
                     
                     $datos = $resultado->fetch_assoc();
                 }

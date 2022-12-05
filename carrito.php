@@ -1,16 +1,37 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])){
+if (!isset($_SESSION['username'])) {
     header("location: homepage.php");
 }
 
-if($_SESSION['rol'] == 2){
+$id = $_GET['id'];
+
+require('include/conexionDB.php');
+$resultado = $conexion->query("select id_producto, nom_producto, marca, precio, cantidad, desc_producto, 
+                                id_categoria, img from producto where id_producto={$id}");
+
+while ($row = $resultado->fetch_assoc()) {
+    if (isset($_SESSION['cart'])) {
+        $items = array_column($_SESSION['cart'], 'Nombre');
+        if(in_array($row['nom_producto'], $items)){
+
+        }
+
+        $count = count($_SESSION['cart']);
+        $_SESSION['cart'][$count] = array("Nombre"=>$row['nom_producto'], "Marca"=>$row['marca']);
+        print_r($_SESSION['cart']);
+    } else {
+        $_SESSION['cart'][0] = array("Nombre"=>$row['nom_producto'], "Marca"=>$row['marca']);
+        print_r($_SESSION['cart']);
+    }
+
+}
+
+if ($_SESSION['rol'] == 2) {
     header("Location: homePage.php");
 }
 
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -30,8 +51,8 @@ if($_SESSION['rol'] == 2){
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php 
-        include "./include/navbar.php";
+    <?php
+    include "./include/navbar.php";
     ?>
     <div class="container p-5">
         <div class="d-flex bd-highlight">
@@ -158,5 +179,3 @@ if($_SESSION['rol'] == 2){
         });
     </script>
 </body>
-
-</html>

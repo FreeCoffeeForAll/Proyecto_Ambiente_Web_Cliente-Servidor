@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("homePage.php");
     }
 
-
     $usuario = $_POST['username'];
     $clave = $_POST['password'];
 
