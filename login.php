@@ -3,12 +3,12 @@ session_start();
 
 require('include/conexionDB.php');
 
-if(isset($_SESSION['username'])){
+if (isset($_SESSION['username'])) {
     header("Location: homepage.php");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(isset($_SESSION["username"])){
+    if (isset($_SESSION["username"])) {
         header("homePage.php");
     }
 
@@ -34,12 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($datos = $sql->fetch_assoc()) {
         echo '';
     } else {
-        echo 'credenciales invalidas';
+
     }
 }
-
-
-
 
 ?>
 <!DOCTYPE html>
@@ -67,10 +64,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
                     <div class="text-center my-5">
                         <div class="card" style="background: whitesmoke">
-                            <div class="card-body p-5">
+                            <div class="card-body p-3">
                                 <h1 class="fs-4 card-title fw-bold mb-4 text-center">Iniciar sesión</h1>
                                 <form method="post" action="">
                                     <fieldset>
+                                        <?php
+                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                            if (isset($_SESSION["username"])) {
+                                                header("homePage.php");
+                                            }
+
+                                            $usuario = $_POST['username'];
+                                            $clave = $_POST['password'];
+
+                                            $sql = $conexion->query("select nom_User, contra, rol_id from usuarios where 
+                                    nom_User = '$usuario' and contra = '$clave';");
+
+
+                                            while ($row = $sql->fetch_assoc()) {
+                                                if ($row['rol_id'] == 1) {
+                                                    $_SESSION["username"] = $usuario;
+                                                    header("Location: gestion.php");
+                                                    $_SESSION["rol"] = $row['rol_id'];
+                                                } else if ($row['rol_id'] == 2) {
+                                                    $_SESSION["username"] = $usuario;
+                                                    $_SESSION["rol"] = $row['rol_id'];
+                                                    header("Location: homePage.php");
+                                                }
+                                                $row = $sql->fetch_assoc();
+                                            }
+                                            if ($datos = $sql->fetch_assoc()) {
+                                                echo '';
+                                            } else {
+                                                echo '<div class="alert alert-danger">                                    
+                                    Nombre de usuario o contraseña incorrecto(s).
+                                </div>        ';
+                                            }
+                                        }
+                                        ?>
                                         <!-- <div class="alert alert-danger">                                    
                                     Nombre de usuario o contraseña incorrecto(s).
                                 </div>                               -->
@@ -85,10 +116,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 placeholder="Contraseña">
                                         </div>
                                         <hr>
-                                        <input type="submit" class="btn btn-success" name='ingresar' value="Ingresar" />
+                                        <input type="submit" class="btn btn-primary" name='ingresar' value="Ingresar" />
+
                             </div>
                             </fieldset>
                             </form>
+                            <div class="p-2">
+                                <a class="btn btn-success" href="userAdd.php">Crear Cuenta</a>
+                            </div>
                         </div>
                     </div>
                 </div>

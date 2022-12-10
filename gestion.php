@@ -1,19 +1,11 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
     header("location: homepage.php");
 }
 
-if($_SESSION['rol'] == 2){
-    header("Location: homePage.php");
-}
-
-$conexion = new mysqli('localhost', 'root', '', 'tienda');
-
-if ($conexion->connect_error != null) {
-    echo "Error al conectar {$conexion->connect_error}";
-}
+require('include/conexionDB.php');
 
 ?>
 
@@ -61,6 +53,7 @@ if ($conexion->connect_error != null) {
                                         <th scope="col" class="text-center">Cantidad</th>
                                         <th scope="col" class="text-center">desc_producto</th>
                                         <th scope="col" class="text-center">Id Categoria</th>
+                                        <th scope="col" class="text-center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,7 +90,7 @@ if ($conexion->connect_error != null) {
                                             echo '        </div>';
                                             echo '       <div class="col-6">';
                                             echo '            <!-- Button trigger modal -->';
-                                            echo "            <a href='eliminar.php?id={$datos['id_producto']}'>";
+                                            echo "            <a href='mostrarBici.php?id={$datos['id_producto']}'>";
                                             echo '            <button type="button" class="btn btn-danger"';
                                             echo '                data-bs-target="#example_modal">';
                                             echo '                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"';

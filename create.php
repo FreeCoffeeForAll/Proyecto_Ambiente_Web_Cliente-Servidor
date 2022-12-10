@@ -1,12 +1,9 @@
 <?php
 require './include/conexionDB.php';
 session_start();
-if(!isset($_SESSION['username'])){
-    header("location: homepage.php");
-}
 
-if($_SESSION['rol'] == 2){
-    header("Location: homePage.php");
+if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
+    header("location: homepage.php");
 }
 
 ?>

@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if(isset($_SESSION['rol']) == 2){
+    header("location: homePage.php");
+}
+
 function recoge($var, $m ="")
 {
     if(!isset($_POST[$var])){
@@ -26,7 +32,7 @@ $apellido = recoge("apellido");
 $correo = recoge("correo");
 $usuario = recoge("usuario");
 $contrasena = recoge("contrasena");
-$role = recoge("role");
+$role = 2;
 $telefono = recoge("telefono");
 
 $nombreOK = false;
@@ -36,6 +42,8 @@ $usuarioOK = false;
 $contrasenaOK = false;
 $roleOK = false;
 $telefonoOK = false;
+
+
 
 if($nombre == ""){
     echo"<p>No se digito el nombre de la persona</p><br>";
@@ -57,7 +65,7 @@ if($usuarioOK &&  $contrasenaOK && $nombreOK && $apellidoOK && $correoOK  && $te
     require_once 'UserPerson.php';
     if(IngresarPersona($usuario, $contrasena, $nombre, $apellido, $correo, $telefono, $role))
     {
-        header("Location: UserDataQuery.php");
+        header("Location: login.php");
     }
 }
 

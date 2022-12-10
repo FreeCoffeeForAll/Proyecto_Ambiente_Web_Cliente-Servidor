@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
+    header("location: homePage.php");
+}
+
 //1. Establecer la conexión con el motor de base de datos y seleccionar la base de datos que vamos a utilizar
 $conexion = new mysqli('localhost', 'root', '', 'tienda');
 

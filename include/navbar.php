@@ -16,28 +16,22 @@
             }
             ?>
         </ul>
-        <ul class="navbar-nav">
+ 
+       <ul class="navbar-nav">
             <?php
             if (isset($_SESSION['rol'])) {
                 if ($_SESSION['rol'] == 1) {
                     echo '<li class="nav-item">';
-                    echo '    <a class="nav-link" href="gestion.php">Gestionar Compras</a>';
+                    echo '    <a class="nav-link" href="gestionCompra.php">Gestionar Compras</a>';
+                    echo '</li>';
+
+                    echo '<li class="nav-item">';
+                    echo '    <a class="nav-link" href="UserDataQuery.php">Gestionar Usuarios</a>';
                     echo '</li>';
                 }
             }
             ?>
         </ul>
-        <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Categorias
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Montaña</a></li>
-                <li><a class="dropdown-item" href="#">BMX</a></li>
-                <li><a class="dropdown-item" href="#">Niños</a></li>
-            </ul>
-        </div>
         <button data-bs-target="#navbarNav" aira-controls="navbarNav" aria-expanded="false"
             aria-label="Toggle navigation" type="button" class="navbar-toggler" data-bs-toggle="collapse">
             <span class="navbar-toggler-icon"></span>
@@ -48,15 +42,21 @@
             if (!isset($_SESSION['rol'])) {
                 echo '                 <ul class="navbar-nav">';
                 echo '                    <li class="nav-item active">';
-                echo '                        <a href="#" class="nav-link active">Registro</a>';
+                echo '                        <a href="userAdd.php" class="nav-link active">Registro</a>';
                 echo '                    </li>';
+                echo '                  <ul class="navbar-nav">
+                                            <li class="nav-item active">
+                                                <a href="login.php" class="nav-link active">Login</a>
+                                            </li>
+                ';
+
             } elseif (isset($_SESSION['rol'])) {
                 echo '            <ul class="navbar-nav">';
                 echo '                <li class="nav-item active">';
                 echo '                    <a href="logout.php" class="nav-link active">Logout</a>';
                 echo '                </li>';
                 echo '                <li class="nav-item active">';
-                echo '                    <a href="carrito.php" class="nav-link">';
+                echo '                    <a href="miCarrito.php" class="nav-link">';
                 echo '                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"';
                 echo '                            class="bi bi-cart" viewBox="0 0 16 16">';
                 echo '                            <path';

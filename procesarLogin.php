@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_SESSION['username']) or $_SESSION['rol'] != 1) {
+  header("location: login.php");
+}
+
 if (!empty($_POST['ingresar'])) {
     if (empty($_POST['username']) and empty($_POST['password'])) {
         echo ' <div class="alert alert-danger">Los campos están vacíos</div>';

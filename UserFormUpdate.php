@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
+    header("location: homePage.php");
+}
+
 //1. Establecer la conexión con el motor de base de datos y seleccionar la base de datos que vamos a utilizar
 $conexion = new mysqli('localhost', 'root', '', 'tienda');
 
@@ -12,10 +18,9 @@ $conexion->query("update usuarios set nombre_usuario = '{$_POST['nombre']}',
                                         apel_User = '{$_POST['apellido']}',
                                         correo_User = '{$_POST['correo']}',
                                         nom_User = '{$_POST['usuario']}',
-                                        contra = '{$_POST['contrasena']}',
-                                        rol_id = '{$_POST['role']}',
+                                        rol_id = '{$_POST['rol']}',
                                         telefono_User = '{$_POST['telefono']}' 
-                                        where id_Usuario = '{$_POST['identificador']}'");
+                                        where id_Usuario = '{$_POST['id']}'");
 
 if($conexion->error != ''){
     echo "Ocurrió un error al ejecutar la consulta: {$conexion->error}";

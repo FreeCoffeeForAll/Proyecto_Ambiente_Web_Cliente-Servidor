@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_SESSION['username']) or $_SESSION['rol'] != 1) {
+  header("location: login.php");
+}
+
 $img_name = $_FILES['image']['name'];
 $temp_img_name = $_FILES['image']['tmp_name'];
 $folder = "./img/";

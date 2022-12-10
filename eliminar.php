@@ -1,6 +1,12 @@
 <?php
 
-$id = $_GET['id'];
+session_start();
+
+if(!isset($_SESSION['username']) or $_SESSION['username'] != 1){
+    header("location: homepage.php");
+}
+
+$id = $_POST['id'];
 
 echo $id;
 

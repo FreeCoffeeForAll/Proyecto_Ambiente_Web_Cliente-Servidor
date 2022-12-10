@@ -2,7 +2,7 @@
 
 session_start();
 
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['username']) or (!isset($_GET['id']))){
   header("Location: login.php");
 }
 
@@ -44,8 +44,8 @@ $datos = $resultado->fetch_assoc();
         <img src="<?php echo "./img/{$datos['img']}"?>" class="img-fluid">
         <br><br>
         <div class="btn-group text-right" role="group" aria-label="Basic example">
-          <a class="btn btn-default btn-block">Regresar</a>
-          <a class="btn btn-success btn-block">Comprar</a>
+          <a href="homePage.php" class="btn btn-default btn-block">Regresar</a>
+          <a href='carrito.php?id=<?= $id ?>' class="btn btn-success btn-block">Comprar</a>
         </div>
       </div>
       <div class="col-md-8">

@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
+    header("location: homePage.php");
+}
+
 function Conecta(){
     $server= "localhost";
     $user = "root";

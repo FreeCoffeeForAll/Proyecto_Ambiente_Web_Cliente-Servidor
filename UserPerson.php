@@ -2,6 +2,10 @@
 
 require_once "UserConexion.php";
 
+if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
+    header("location: homePage.php");
+}
+
 function IngresarPersona($pUsuario, $pContrasena, $pNombre, $pApellido, $pCorreo, $pTelefono, $pRole)
 {
     $retorno = false;

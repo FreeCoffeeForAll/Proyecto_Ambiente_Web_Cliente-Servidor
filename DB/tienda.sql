@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2022 a las 02:57:27
+-- Tiempo de generación: 10-12-2022 a las 22:12:02
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -42,6 +42,29 @@ INSERT INTO `categoria` (`id_categoria`, `nom_categoria`, `desc_categoria`) VALU
 (2, 'BMX', 'Bicicleta para acrobacias'),
 (3, 'Ruta', 'Bicicletas diseñadas para la velocidad'),
 (4, 'Niños', 'Biciceltas para niños');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras`
+--
+
+CREATE TABLE `compras` (
+  `id_compra` int(11) NOT NULL,
+  `id_productos` varchar(30) NOT NULL,
+  `total_precio` int(11) NOT NULL,
+  `estado` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id_compra`, `id_productos`, `total_precio`, `estado`) VALUES
+(3, '19 18 ', 164, 'Entregado'),
+(4, '17 20 ', 130, 'Entregado'),
+(5, '19 20 ', 90, 'Entregado'),
+(6, '22 20 ', 190, 'Entregado');
 
 -- --------------------------------------------------------
 
@@ -92,10 +115,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `nom_producto`, `marca`, `precio`, `cantidad`, `desc_producto`, `id_categoria`, `img`) VALUES
-(17, 'Bicicleta de Montaña - NA', 'SUPERFIT', 99, 99, 'Bicicleta de montaña de color amarillo y negro   ', 1, '71HtpU2prpL._AC_SX425_.jpg'),
-(18, 'Bicicleta de Montaña - AN', 'SUPERFIT', 105, 19, 'Bicicleta de Montaña de color azul con naranja', 1, 'descarga.jfif'),
 (19, 'Bicicleta BMX - M', 'Mongoose', 60, 56, 'Bicicleta BMX Morada', 2, '51oVBGq0x1L._SL500_.jpg'),
-(20, 'Bicicleta de Niños', 'YAMAHA', 30, 50, 'Bicicleta de Niños', 4, 'D_NQ_NP_761024-MLV44201395200_112020-O.jpg');
+(20, 'Bicicleta de Niños', 'YAMAHA', 30, 50, 'Bicicleta de Niños ', 4, 'D_NQ_NP_761024-MLV44201395200_112020-O.jpg'),
+(22, 'Bicicleta de Montaña - AN', 'SUPERFIT', 160, 99, 'Bicicleta de Montaña - AN', 1, '71HtpU2prpL._AC_SX425_.jpg'),
+(26, 'Bicicleta de Montaña - NA', 'Superfit', 129, 99, 'Bicicleta de Montaña de color naranja y azul', 1, 'descarga.jfif');
 
 -- --------------------------------------------------------
 
@@ -138,7 +161,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_Usuario`, `nom_User`, `contra`, `nombre_usuario`, `apel_User`, `correo_User`, `telefono_User`, `rol_id`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 'admin', 1223, 1),
+(1, 'admin', 'admin', '  admin   ', 'admin', '', 1234, 1),
 (2, 'Juan', '123', 'Juan', 'Lopez', 'juanito22@gmail.com', 123, 2);
 
 --
@@ -150,6 +173,12 @@ INSERT INTO `usuarios` (`id_Usuario`, `nom_User`, `contra`, `nombre_usuario`, `a
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id_compra`);
 
 --
 -- Indices de la tabla `detalle_factura`
@@ -197,6 +226,12 @@ ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
@@ -212,7 +247,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -224,7 +259,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas

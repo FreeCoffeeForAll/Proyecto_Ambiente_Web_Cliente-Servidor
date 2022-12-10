@@ -1,20 +1,14 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['username']) or $_SESSION['rol'] != 1){
+if (!isset($_SESSION['username']) or $_SESSION['rol'] != 1) {
     header("location: homePage.php");
 }
 
+include('include/conexionDB.php');
 $id = $_GET['id'];
 
-$conexion = new mysqli('localhost', 'root', '', 'tienda');
-
-if ($conexion->connect_error != null) {
-    echo "Error al conectar {$conexion->connect_error}";
-}
-
-$resultado = $conexion->query("select id_producto, nom_producto, marca, precio, cantidad, desc_producto, 
-                            id_categoria, img from producto where id_producto = $id");
+$resultado = $conexion->query("SELECT * FROM producto WHERE id_producto = $id");
 
 $datos = $resultado->fetch_assoc();
 
@@ -40,24 +34,24 @@ $datos = $resultado->fetch_assoc();
 
 <body class="d-flex flex-column min-vh-100">
 
-    <?php include('include/navbar.php')?>
+    <?php include('include/navbar.php') ?>
 
     <div class="container p-5">
         <div class="d-flex bd-highlight">
             <div class="p-2 w-100 bd-highlight">
                 <div class="card">
                     <div class="card-header">
-                        Modificar bicicleta
+                        Registro
                     </div>
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data"
-                            action="editFormulario.php">
+                        <form method="POST" enctype="multipart/form-data" action="eliminar.php">
                             <input type="hidden" name="id" value="<?= $id ?>">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-text">
                                         <label for="categoria" class="form-label">Categoría</label>
-                                        <select class="form-control form-control-sm col-md-6" id="categoria" name="categoria" required>
+                                        <select class="form-control form-control-sm col-md-6" id="categoria" disabled
+                                            name="categoria" required>
                                             <option value="1">Mountain Bike</option>
                                             <option value="2">BMX</option>
                                             <option value="3">Ruta</option>
@@ -67,18 +61,18 @@ $datos = $resultado->fetch_assoc();
                                 </div>
                                 <div class="col-6">
                                     <div class="form-text">
-                                        <label for="marca" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" name="marca" placeholder="Marca"
-                                            value="<?= $datos['marca'] ?>">
+                                        <label for="apellido" class="form-label">Marca</label>
+                                        <input value="<?= $datos['marca'] ?>" type="text" class="form-control"
+                                            name="apellido" placeholder="Digite Apellido" disabled>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-text">
-                                        <label for="nombre-producto" class="form-label">Nombre</label>
-                                        <input type="text" id="nombre-producto" class="form-control" name="nombre-producto"
-                                            value="<?= $datos['nom_producto'] ?>" required>
+                                        <label for="nombre" class="form-label">Nombre Producto</label>
+                                        <input type="text" value="<?= $datos['nom_producto'] ?>" class="form-control"
+                                            name="nombre" placeholder="Inserte Nombre" disabled>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -86,32 +80,23 @@ $datos = $resultado->fetch_assoc();
                                         <label for="inputDescripcion" class="form-label">Descripción</label>
                                         <textarea name="descripcion" id="inputDescripcion" cols="10" rows="3"
                                             class="form-control" maxlength="90"
-                                            required><?= $datos['desc_producto'] ?> </textarea>
+                                            disabled><?= $datos['desc_producto'] ?> </textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-text">
-                                        <label for="inputPrecio" class="form-label">Precio</label>
-                                        <input type="number" id="inputPrecio" class="form-control" name="precio" min="0"
-                                            max="1000000" value="<?= $datos['precio'] ?>" required>
+                                        <label for="precio" class="form-label">Precio</label>
+                                        <input type="number" name="precio" id="precio" placeholder="Rol"
+                                            value="<?= $datos['precio'] ?>" min=1 max=2 class="form-control" disabled>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-text">
-                                        <label for="inputCantidad" class="form-label">Cantidad</label>
-                                        <input type="number" id="inputCantidad" class="form-control" name="cantidad"
-                                            min="0" max="1000" value="<?= $datos['cantidad'] ?>" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-text">
-                                        <label for="inputImagen" class="form-label">Imagen</label>
-                                        <input type="file" id="inputImagen" class="form-control" name="image"
-                                            accept="image/png, image/jpeg" value="img/<?= $datos['img']?>">
+                                        <label for="cantidad" class="form-label">Cantidad</label>
+                                        <input type="number" name="cantidad" id="cantidad"
+                                            value="<?= $datos['cantidad'] ?>" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -121,9 +106,9 @@ $datos = $resultado->fetch_assoc();
                             <div class="btn-group float-end" role="group" aria-label="Basic example">
                                 <a href="gestion.php" class="btn btn-default">Volver</a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
-                                    Guardar cambios
+                                    Eliminar
                                 </button>
 
                                 <!-- Modal -->
@@ -137,7 +122,7 @@ $datos = $resultado->fetch_assoc();
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Estás seguro de que deseas guardar los cambios?
+                                                ¿Estás seguro de que deseas eliminar este usuario?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger"
